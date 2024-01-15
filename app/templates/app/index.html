@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Тестовая страница</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('form').on('submit', function(e){
+                e.preventDefault();
+                var data = {
+                    field1: $('#field1').val(),
+                    field2: $('#field2').val(),
+                    field3: $('#field3').val()
+                };
+                $.ajax({
+                    type: 'POST',
+                    url: '/submit/',
+                    data: JSON.stringify(data),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function(response){
+                        console.log(response);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <form method="post">
+        <input type="text" id="field1" name="field1" placeholder="Поле 1">
+        <input type="text" id="field2" name="field2" placeholder="Поле 2">
+        <input type="text" id="field3" name="field3" placeholder="Поле 3">
+        <button type="submit">Отправить</button>
+    </form>
+</body>
+</html>
